@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.TagMapper">
+	<insert id="addTag" parameterType="Tag">
+		insert into tag(t_id,t_name,t_count) values(seq_tag_id.nextval,#{t_name},#{t_count})
+	</insert>
+	<select id="findTag" resultType="Tag">
+		select t_id,t_name,t_count from tag where 1=1
+		<if test="t_name!=null">
+			and t_name=#{t_name}
+		</if>
+	</select>
+	<update id="updateTag" parameterType="Tag">
+		update tag set t_count=#{t_count} where t_name=#{t_name}
+	</update>
+</mapper>

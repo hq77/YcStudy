@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.FavoriteMapper">
+	<cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"></cache>
+<insert id="insertFavorite" parameterType="Favorite">
+	insert into Favorite(f_id,f_label,f_url,f_tags,f_desc) values(seq_fa_id .nextval,#{f_label},#{f_url},#{f_tags},#{f_desc})
+</insert>
+<select id="selectFavorite" parameterType="Favorite" resultType="Favorite">
+	select f_label,f_url,f_tags,f_desc from favorite where 1=1
+		<if test="f_tags!=null">
+			and f_tags like #{f_tags}
+		</if>
+</select>
+</mapper>
